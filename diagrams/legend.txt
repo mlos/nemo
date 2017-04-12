@@ -1,0 +1,61 @@
+Components 
+
+PWR - Power Supply
+SNDC - USB Sound Card
+RPI - Raspberry Pi, Model B, Revision 2.0, 512MB
+PMC - Power Button and Status Management Circuitry
+PWR_RES - Power / Reset button
+LED1 - Status LED (red)
+LED2 - Status LED (green)
+	Implemented using an RGB LED, capable of displaying
+	orange (red + green)
+BTN1 - Selector button 1
+BTN2 - Selector button 2
+DISP - OLED Display
+
+Interfaces
+
+P6 - Reset pins (insert link)
+GPIO - Indicates one or more GPIO lines
+SPI - Indicates SPI interface
+
+
+====
+RST_INB		Reset Inhibit
+PWR_BTN_CTL	Power Button control
+PWW_BTN_ACT	Power Button active
+LED_R_CTL	Red LED control
+LED_G_CTL	Green LED control
+LED_R_ACT	Red LED active
+LED_G_ACT	Green LED active
+RST_GND		Reset ground
+RST_RUN		Reset RUN
+
+
+====
+Required behaviour:
+
+Status LEDs:
+When power is applied to the RPI, the red LED should be lit. As soon as the software starts booting, both the green and green LED should be lit. Since it is an RGB-LED, the resulting color will be orange.
+
+As soon as the software is ready to serve requests, the red LED is turned off, the green LED remains lit.
+
+When the software is shutting down, the red LED should be lit, while the green LED remains lit as well, forming orange. As soon as the RPI is completely shut down, the green LED should be turned off, the red LED should remain lit.
+
+Implementation
+Using the 3V3 input, and the fact that LED_R_ACT is NOT(LED_R_CTL), the red LED will be lit when the system is in a shutdown state (or when explicitly set to low). 
+LED_G_ACT is equal to LED_G_CTL, so it will be off when the system is shutdown state.
+
+Power and reset button:
+
+Required behavior
+When pressing the power button for more than 3 seconds, the RPI should initial a shutdown sequence. When the RPI is shut down, pressing the power button should provoke a soft-reset, resulting in a system reboot. Under no circumstances outside the shut down state, should a soft reset be provoked.
+
+
+Implementation
+Setting PWR_BTN_CTL high will enable PWR_BTN_ACT, which can be read by the software to see if it has been pressed contiguously for more than N seconds. The software can then decide to initiate a shutdown sequence.
+
+When RST_INB is low, which will always be the case when the system is shutdown, enabling PWR_BTN_CTL will result in RST_RUN to be set high as well. RST_RUN and RST_GND are connected to the P6 header pins on the RPI, to provoke a soft-reset. While the system is booting, serving requests or shutting down, RST_INB should be kept high, to prevent a soft-reset.
+
+
+When the system is 
