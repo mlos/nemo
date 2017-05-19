@@ -4,54 +4,59 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>240</y>
+      <x>100</x>
+      <y>160</y>
       <w>470</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>
-*RPI*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>430</x>
-      <y>370</y>
-      <w>80</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*DISP*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>610</x>
-      <y>150</y>
-      <w>100</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=.
-Amplifier</panel_attributes>
+*RPI*
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>460</x>
-      <y>150</y>
+      <y>290</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*DISP*
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>70</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>*SNDC*</panel_attributes>
+    <panel_attributes>lt=.
+Amplifier
+bg=gray
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>70</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>*SNDC*
+bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>190</y>
+      <x>520</x>
+      <y>110</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -63,19 +68,20 @@ m2=USB</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>150</y>
+      <x>100</x>
+      <y>70</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>*PWR*</panel_attributes>
+    <panel_attributes>*PWR*
+bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>150</y>
+      <x>580</x>
+      <y>70</y>
       <w>80</w>
       <h>40</h>
     </coordinates>
@@ -87,8 +93,8 @@ RCA</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>110</x>
-      <y>190</y>
+      <x>140</x>
+      <y>110</y>
       <w>40</w>
       <h>70</h>
     </coordinates>
@@ -100,8 +106,8 @@ m1=5V</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>460</x>
-      <y>300</y>
+      <x>490</x>
+      <y>220</y>
       <w>40</w>
       <h>90</h>
     </coordinates>
@@ -113,100 +119,96 @@ m2=SPI</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>370</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*BTN1*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>270</x>
-      <y>370</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*BTN2*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>560</x>
-      <y>370</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*PWR_RES*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>640</x>
-      <y>370</y>
-      <w>50</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*LED_R*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>700</x>
-      <y>370</y>
-      <w>50</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*LED_G*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>700</x>
-      <y>300</y>
-      <w>30</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-fontsize=10</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>300</y>
-      <w>30</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-fontsize=10</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>290</x>
-      <y>300</y>
-      <w>50</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;&gt;
-fontsize=10
-m2=GPIO</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>110</x>
-      <y>300</y>
+      <y>290</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*BTN1*
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>290</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*BTN2*
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>290</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*PWR_RES*
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>290</y>
+      <w>50</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*LED_R*
+bg=blue
+fg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>290</y>
+      <w>50</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*LED_G*
+bg=blue
+fg=green
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>220</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+fontsize=10</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>220</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+fontsize=10</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>220</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -218,8 +220,21 @@ m2=GPIO</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
-      <y>300</y>
+      <x>140</x>
+      <y>220</y>
+      <w>50</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+fontsize=10
+m2=GPIO</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>220</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -230,21 +245,22 @@ fontsize=10</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>150</y>
+      <x>230</x>
+      <y>70</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=.
 Home 
-Network</panel_attributes>
+Network
+bg=gray</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>190</y>
+      <x>270</x>
+      <y>110</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -256,19 +272,21 @@ m2=LAN</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>240</y>
+      <x>630</x>
+      <y>160</y>
       <w>130</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>*PMC*</panel_attributes>
+    <panel_attributes>*PMC*
+bg=pink
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>240</y>
+      <x>560</x>
+      <y>160</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
@@ -278,41 +296,14 @@ m2=GPIO</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>330</x>
-      <y>150</y>
-      <w>100</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>Bluetooth
-Adapter
-fg=gray
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>370</x>
-      <y>190</y>
-      <w>50</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=-
-fontsize=10
-m2=USB</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
     <id>Text</id>
     <coordinates>
-      <x>260</x>
-      <y>540</y>
+      <x>340</x>
+      <y>360</y>
       <w>340</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>*Mambo 2000 block diagram*
+    <panel_attributes>*Nemo block diagram*
 fontsize=9
 bg=white
 </panel_attributes>
@@ -321,8 +312,8 @@ bg=white
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>280</y>
+      <x>560</x>
+      <y>200</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
