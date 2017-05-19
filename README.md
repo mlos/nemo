@@ -11,13 +11,13 @@ Welcome to Nemo, the **ne**tworked **m**usic b**o**x. The project describes my e
 
 ### UPnP
 
-[UPnP][ref-upnp] stands for Universal Plug and Play and is the technology that underpins [DLNA][ref-dlna] , which lets you stream media between devices connected in your home network, and that comes with virtually any audio or TV equipment you buy. 
+[UPnP][ref-upnp] stands for Universal Plug and Play and is the technology that underpins [DLNA][ref-dlna] , which lets you stream media between devices connected in your home network, and that comes with virtually any audio or TV equipment you can buy nowadays. 
 
 ### Context
 The following diagram illustrates the context in which Nemo operates. A [smartphone app][ref-app], selects a song from the music library on the [NAS][ref-nas], and instructs Nemo to reproduce it.
 
 - - -
-![Context](diagrams/generated/Concept.png =500x)
+![Context](diagrams/generated/Concept.png)
 - - -
 
 ## The Requirements
@@ -34,7 +34,7 @@ Nemo is conceived to fulfill the following needs:
 ### Hardware
 The following schematic illustrates the high level hardware design.
 - - -
-![Block diagram](diagrams/generated/BlockDiagram.png =500x)
+![Block diagram](diagrams/generated/BlockDiagram.png)
 - - -
 The following components are used:
 
