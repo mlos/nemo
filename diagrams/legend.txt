@@ -21,15 +21,15 @@ SPI - Indicates SPI interface
 
 
 ====
-RST_INB		Reset Inhibit
-PWR_BTN_CTL	Power Button control
-PWW_BTN_ACT	Power Button active
-LED_R_CTL	Red LED control
-LED_G_CTL	Green LED control
-LED_R_ACT	Red LED active
-LED_G_ACT	Green LED active
-RST_GND		Reset ground
-RST_RUN		Reset RUN
+RST_INB		Reset Inhibit - When low, PWR_BTN will reset the RPI
+PWR_BTN		When high, resets the RPI, unless RST_INB is high.
+PWR_BTN_IN	GPIO.18 (IN), reads PWR_BTN.
+LED_R_CTL	GPIO.24 (OUT). LED_R = NOT(LED_R_CTL)
+LED_G_CTL	GPIO.23 (OUT). LED_G = LED_G_CTL
+LED_R		Red LED
+LED_G		Green LED
+RST_GND		Reset ground. Connected to P6-01 on RPI
+RST_RUN		Reset RUN. Connected to P6-02 on RPI
 
 
 ====
