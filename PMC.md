@@ -19,7 +19,7 @@ The power management circuitry behaviour is conceived to fulfill the following n
 
 ### The Circuit
 
-![Circuit](diagrams/PowerCircuitry.svg =500x)
+![Circuit](diagrams/PowerCircuitry.svg)
 
 #### Connections
 
@@ -63,5 +63,5 @@ Note: the resistors for the LEDs should not strictly form part of the circuitry,
 #### The Prototype
 With wires leading also to the Raspberry Pi GPIO (not depicted)
 
-![PMC prototype](diagrams/PMCPrototype.jpg =500x)
+![PMC prototype](diagrams/PMCPrototype.jpg)
 

@@ -26,7 +26,7 @@ UPnP has a notion of three logical components:
 The following diagram illustrates the UPnP context in which Nemo operates. A [smartphone app][ref-app] (the Control Point) selects a song from the music library on the [NAS][ref-nas] (the Media Server) and instructs Nemo (the Renderer) to reproduce it.
 
 - - -
-![Context](diagrams/generated/Concept.png =600x)
+![Context](diagrams/generated/Concept.png)
 - - -
 
 ## The Requirements
@@ -43,7 +43,7 @@ Nemo is conceived to fulfill the following needs:
 ### Hardware
 The following schematic illustrates the high level hardware design.
 - - -
-![Block diagram](diagrams/generated/BlockDiagram.png =600x)
+![Block diagram](diagrams/generated/BlockDiagram.png)
 - - -
 The following components are used:
 
