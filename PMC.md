@@ -19,7 +19,7 @@ The power management circuitry behaviour is conceived to fulfill the following n
 
 ### The Circuit
 
-![Circuit](diagrams/PowerCircuitry.svg)
+![Circuit](diagrams/PowerCircuitry.png)
 
 #### Connections
 
