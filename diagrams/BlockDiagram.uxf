@@ -62,7 +62,9 @@ bg=blue</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 fontsize=10
-m2=USB</panel_attributes>
+m2=USB
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
@@ -87,7 +89,9 @@ bg=orange</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 fontsize=10
-RCA</panel_attributes>
+RCA
+lw=2
+</panel_attributes>
     <additional_attributes>60.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -100,7 +104,9 @@ RCA</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 fontsize=10
-m1=5V</panel_attributes>
+m1=5V
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -113,7 +119,9 @@ m1=5V</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 fontsize=10
-m2=SPI</panel_attributes>
+m2=SPI
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -157,51 +165,24 @@ bg=orange</panel_attributes>
     <coordinates>
       <x>670</x>
       <y>290</y>
-      <w>50</w>
+      <w>70</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>*LED_R*
-bg=blue
-fg=red
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>730</x>
-      <y>290</y>
-      <w>50</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*LED_G*
-bg=blue
-fg=green
-</panel_attributes>
+    <panel_attributes>*LED_RGB*
+bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
+      <x>690</x>
       <y>220</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-fontsize=10</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>680</x>
-      <y>220</y>
-      <w>30</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-fontsize=10</panel_attributes>
+fontsize=10
+lw=2</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -214,7 +195,9 @@ fontsize=10</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;
 fontsize=10
-m2=GPIO</panel_attributes>
+m2=GPIO
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -227,7 +210,9 @@ m2=GPIO</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;
 fontsize=10
-m2=GPIO</panel_attributes>
+m2=GPIO
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -239,7 +224,9 @@ m2=GPIO</panel_attributes>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;
-fontsize=10</panel_attributes>
+fontsize=10
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -266,7 +253,9 @@ bg=gray</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 fontsize=10
-m2=LAN</panel_attributes>
+m2=LAN
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
@@ -286,40 +275,30 @@ bg=pink
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>160</y>
+      <y>150</y>
       <w>90</w>
-      <h>30</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;&gt;&gt;
 fontsize=10
-m2=GPIO</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Text</id>
-    <coordinates>
-      <x>340</x>
-      <y>360</y>
-      <w>340</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>*Nemo block diagram*
-fontsize=9
-bg=white
+m2=GPIO
+lw=2
 </panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>200</y>
+      <y>190</y>
       <w>90</w>
-      <h>30</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;
 fontsize=10
-m2=P6</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+m2=P6
+lw=2
+</panel_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

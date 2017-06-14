@@ -1,5 +1,7 @@
 # nemo
 
+** UPDATE: Added [Power Management Circuitry](PMC.md)**
+
 - - -
 ## The Concept
 
@@ -11,13 +13,20 @@ Welcome to Nemo, the **ne**tworked **m**usic b**o**x. The project describes my e
 
 ### UPnP
 
-[UPnP][ref-upnp] stands for Universal Plug and Play and is the technology that underpins [DLNA][ref-dlna] , which lets you stream media between devices connected in your home network, and that comes with virtually any audio or TV equipment you can buy nowadays. 
+[UPnP][ref-upnp] stands for Universal Plug and Play and is the technology that underpins [DLNA][ref-dlna] , which lets you stream media between devices connected in your home network, and that comes with virtually any audio or TV equipment you can buy nowadays.
+
+UPnP has a notion of three logical components:
+
+* a Media Server holding audio, video, photo's, etc.
+* a Renderer, reproducing content from the Media Server
+* a Control Point controlling the Renderer and the Media Server 
+
 
 ### Context
-The following diagram illustrates the context in which Nemo operates. A [smartphone app][ref-app], selects a song from the music library on the [NAS][ref-nas], and instructs Nemo to reproduce it.
+The following diagram illustrates the UPnP context in which Nemo operates. A [smartphone app][ref-app] (the Control Point) selects a song from the music library on the [NAS][ref-nas] (the Media Server) and instructs Nemo (the Renderer) to reproduce it.
 
 - - -
-![Context](diagrams/generated/Concept.png)
+![Context](diagrams/generated/Concept.png =600x)
 - - -
 
 ## The Requirements
@@ -34,7 +43,7 @@ Nemo is conceived to fulfill the following needs:
 ### Hardware
 The following schematic illustrates the high level hardware design.
 - - -
-![Block diagram](diagrams/generated/BlockDiagram.png)
+![Block diagram](diagrams/generated/BlockDiagram.png =600x)
 - - -
 The following components are used:
 
@@ -50,7 +59,7 @@ The following components are used:
 
 **PWR_RES** - The power and reset button.
 
-**LED_R** and **LED_G** - Red and green LEDs respectively, that are used for system feedback. A third color (orange) is also used by combining the colors. A single [RGB LED][ref-led] neatly fulfills this function.
+**LED_RGB** - Status LED for system feedback, with support for red, yellow, green and purple colors. A single [RGB LED][ref-led] neatly fulfills this function.
 
 **PMC** - The [Power Management Circuitry](PMC.md), interfaces with the **RPI** and is responsible for making sure the LEDs have the right color and enabling the **PWR_RES** button depending on the system state.
 
@@ -58,11 +67,11 @@ The following components are used:
 
 ### Software
 
-(To be described)
+Follows
 
 ### Hardware / Software interface
 
-(To be described)
+Follows
 
 - - - 
 - 
