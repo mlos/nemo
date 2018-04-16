@@ -15,10 +15,7 @@ LED_R_CTL = 23
 LED_G_CTL = 24
 
 AppKey = "nemo"
-MaxAppType = 2
-AppTypeCopyright = 0
-AppTypePower = 1
-currAppType = 0
+AppType = 0
 
 PowerButtonPressedDuration = 3 # seconds
 
@@ -55,19 +52,13 @@ while True:
       # Reset pin to input and pull-down. This will make sure LED_R will
       # light up by default
       GPIO.setup(LED_R_CTL, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-      inbus.publish("", AppTypePower)
+      inbus.publish("0", AppType)
       if Debug:
         print "Powering off (not for real)"
       else:
         call(["poweroff"])
       exit(0)
 
-  inbus.publish(
-        json.dumps({'ip': '1,2,3,4',
-                    'version': '1.0'}),
-        AppTypeCopyright)
-
+  inbus.publish("1", AppType)
   call(["touch","/tmp/NO.power.off"])
-  
-
 
