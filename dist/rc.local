@@ -1,0 +1,8 @@
+#
+# Add this file to the end of /etc/rc.local
+#
+
+/usr/bin/python /home/upnp/sys/power.py &
+/usr/bin/python /home/upnp/sys/inbus-server.py &
+
+exit 0
