@@ -3,6 +3,9 @@
 #
 
 /usr/bin/python /home/upnp/sys/power.py &
+sleep 3 # Allow server to start
 /usr/bin/python /home/upnp/sys/inbus-server.py &
+/home/upnp/sys/upnp-display -o i -a nemo -t 10 &
+/usr/bin/python /home/upnp/sys/display.py &
 
 exit 0
