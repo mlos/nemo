@@ -10,6 +10,7 @@ from inbus.client.publisher import Publisher
 
 Debug=0
 
+# BCM numbering (not BOARD)
 PWR_BTN_IN = 18
 LED_R_CTL = 23
 LED_G_CTL = 24
