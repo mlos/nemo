@@ -3,7 +3,6 @@
 # (c) 2018 Maarten Los. All rights reserved.
 # 
 #
-
 import os
 import time
 import sys
@@ -124,6 +123,11 @@ def make_font(name, size):
     return ImageFont.truetype(font_path, size)
 
 
+def make_bitmap(name):
+    bitmap_path = os.path.abspath(os.path.join(
+        os.path.dirname(__file__), 'bitmaps', name))
+    return Image.open(bitmap_path)
+
 
 def get_device():
     parser = cmdline.create_parser(description='nemo')
@@ -133,16 +137,54 @@ def get_device():
 # ------- main
 
 device = get_device()
-font = make_font("PixelOperator.ttf", 16)
+fnt = make_font("PixelOperator.ttf", 16)
+
+bounds = device.bounding_box # [ left, top, right, bottom ]
+top_line = [0, 0, bounds[2], 0]
+bottom_line = [0, bounds[3],  bounds[2], bounds[3] ]
+play = make_bitmap("play.png")
+
+
+# Modes:
+# 1 - Showing boot message
+# 2 - Showing goodbye message
+# 3 - Showing copyright + info
+# 4 - Rendering artist + song + status
+mode = 1
+
+def draw_marker(d):
+    d.rectangle(top_line, outline="white")
+    d.rectangle(bottom_line, outline="white")
+    
+    
+def showing_boot_message():
+    message = "Welcome to Nemo"
+    with canvas(device) as draw:
+        draw_marker(draw)
+        size = draw.textsize(message, font=fnt)
+        left = device.width//2 - size[0]//2
+        top = device.height//2 - size[1]//2 - 5
+        draw.text((left, top), message, fill="white", font=fnt)
+
+
+showing_boot_message()
+while True:
+    time.sleep(1)
+    
 
 image_composition = ImageComposition(device)
 
 try:
+    ci_play = ComposableImage(make_bitmap("play.png"), position=(0, 50))
+    ci_pause = ComposableImage(make_bitmap("pause.png"), position=(0, 50))
+    image_composition.add_image(ci_play)
+    image_composition.remove_image(ci_play)
+    image_composition.add_image(ci_pause)
     while True:
         for title in titles:
             synchroniser = Synchroniser()
-            ci_song = ComposableImage(TextImage(device, title[0], font).image, position=(0, 1))
-            ci_artist = ComposableImage(TextImage(device, title[1], font).image, position=(0, 30))
+            ci_song = ComposableImage(TextImage(device, title[0], fnt).image, position=(0, 1))
+            ci_artist = ComposableImage(TextImage(device, title[1], fnt).image, position=(0, 20))
             song = Scroller(image_composition, ci_song, 100, synchroniser)
             artist = Scroller(image_composition, ci_artist, 100, synchroniser)
             cycles = 0
@@ -155,12 +197,14 @@ try:
 
                 with canvas(device, background=image_composition()) as draw:
                     image_composition.refresh()
-                    draw.rectangle(device.bounding_box, outline="white")
+                    #draw.rectangle(device.bounding_box, outline="white")
+                    draw_marker(draw)
+                    #draw.rectangle(top_line, outline="white")
+                    #draw.rectangle(bottom_line, outline="white")
 
             del artist
             del song
 
 except KeyboardInterrupt:
     pass
-
 
