@@ -10,6 +10,22 @@ from PIL import ImageFont, Image, ImageDraw
 from luma.core import cmdline
 from luma.core.render import canvas
 from luma.core.image_composition import ImageComposition, ComposableImage
+import RPi.GPIO as GPIO
+
+OLED_RES = 25
+
+def enable_oled():
+    GPIO.setmode(GPIO.BCM) # Use Pi numbering (not physcial pins)
+    GPIO.setup(OLED_RES, GPIO.OUT)
+
+    # Reset OLED
+    GPIO.output(OLED_RES, True)
+    time.sleep(0.5)
+    GPIO.output(OLED_RES, False)
+    time.sleep(0.5)
+    GPIO.output(OLED_RES, True)
+    time.sleep(0.5)
+
 
 titles = [
     ("Bridge over troubled water", "Simon & Garfunkel"),
@@ -136,6 +152,8 @@ def get_device():
 
 # ------- main
 
+enable_oled()
+
 device = get_device()
 fnt = make_font("PixelOperator.ttf", 16)
 
@@ -167,9 +185,9 @@ def showing_boot_message():
         draw.text((left, top), message, fill="white", font=fnt)
 
 
-showing_boot_message()
-while True:
-    time.sleep(1)
+#while True:
+#    showing_boot_message()
+#    time.sleep(1)
     
 
 image_composition = ImageComposition(device)
@@ -197,10 +215,7 @@ try:
 
                 with canvas(device, background=image_composition()) as draw:
                     image_composition.refresh()
-                    #draw.rectangle(device.bounding_box, outline="white")
                     draw_marker(draw)
-                    #draw.rectangle(top_line, outline="white")
-                    #draw.rectangle(bottom_line, outline="white")
 
             del artist
             del song

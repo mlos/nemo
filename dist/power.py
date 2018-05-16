@@ -14,7 +14,6 @@ Debug=0
 PWR_BTN_IN = 18
 LED_R_CTL = 23
 LED_G_CTL = 24
-OLED_RES = 25
 
 AppKey = "nemo"
 AppType = 0
@@ -30,14 +29,15 @@ GPIO.setmode(GPIO.BCM) # Use Pi numbering (not physcial pins)
 GPIO.setup(PWR_BTN_IN, GPIO.IN)
 GPIO.setup(LED_R_CTL, GPIO.OUT)
 GPIO.setup(LED_G_CTL, GPIO.OUT)
-GPIO.setup(OLED_RES, GPIO.OUT)
 
-# Reset OLED
-GPIO.output(OLED_RES, True)
-time.sleep(1)
-GPIO.output(OLED_RES, False)
-time.sleep(1)
-GPIO.output(OLED_RES, True)
+#GPIO.setup(OLED_RES, GPIO.OUT)
+
+## Reset OLED
+#GPIO.output(OLED_RES, True)
+#time.sleep(1)
+#GPIO.output(OLED_RES, False)
+#time.sleep(1)
+#GPIO.output(OLED_RES, True)
 
 
 #if Debug:
