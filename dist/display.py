@@ -6,14 +6,14 @@
 import os
 import time
 import sys
-from PIL import ImageFont, Image, ImageDraw
+import thread
+import json
 from luma.core import cmdline
-from luma.core.render import canvas
-from luma.core.image_composition import ImageComposition, ComposableImage
 import RPi.GPIO as GPIO
 from screens import MainScreen
 from screens import SimpleScreen
 import graphutils
+from inbus.client.subscriber import Subscriber
 
 OLED_RES = 25
 
@@ -35,10 +35,33 @@ def get_device():
     args = parser.parse_args(sys.argv[1:])
     return cmdline.create_device(args)
 
+class SharedData:
+    def __init__(self, **kwargs):
+        self.__dict__ = kwargs
+
+lock = thread.allocate_lock()
+event = SharedData()
+
+def inbus_observer():
+    global event
+    event.has_event = False
+    with Subscriber("nemo") as s:
+        while True:
+            try:
+                payload, applicationType = s.get_published_message()
+                print "Received :'" + payload + "' (Type: " + str(applicationType) + ")"
+                with lock:
+                    event.has_event = True
+                    event.payload = payload
+                    event.app_type = applicationType
+
+            except RuntimeError:
+                print "Error receiving Inbus message"
 
 # ------- main
 
 enable_oled()
+
 
 device = get_device()
 fnt = graphutils.make_font("PixelOperator.ttf", 16)
@@ -51,32 +74,40 @@ fnt = graphutils.make_font("PixelOperator.ttf", 16)
 # 4 - Rendering artist + song + status
 mode = 1
 
-    
-#def showing_boot_message():
-#    message = "Welcome to Nemo"
-#    with canvas(device) as draw:
-#        draw_marker(draw)
-#        size = draw.textsize(message, font=fnt)
-#        left = device.width//2 - size[0]//2
-#        top = device.height//2 - size[1]//2 - 5
-#        draw.text((left, top), message, fill="white", font=fnt)
-
-
-#while True:
-#    showing_boot_message()
-#    time.sleep(1)
-    
-
-m = MainScreen(device, fnt)
+music_screen = MainScreen(device, fnt)
 welcome_screen = SimpleScreen(device, fnt, "Welcome to Nemo")
 
-current_screen = m
+current_screen = music_screen
+
+thread.start_new_thread(inbus_observer, ())
 
 try:
-    m.set_info("Song with a very long title", "Artist with a very long name")
-    m.resume()
+    music_screen.set_info("Song with a very long title", "Artist with a very long name")
+    music_screen.resume()
 
+    must_handle_event = False
+    payload = None
+    app_type = -1
     while True:
+        with lock:
+            if event.has_event:
+                must_handle_event = True
+                payload = event.payload
+                app_type = event.app_type
+                event.has_event = False
+
+        if must_handle_event:
+            print "EVENT!", app_type
+            must_handle_event = False
+            if app_type == 0:
+                if payload == "1":
+                    current_screen = welcome_screen
+            elif app_type == 10:
+                info = json.loads(payload)
+                music_screen.set_info(info["title"], info["artist"])
+                current_screen = music_screen
+            current_screen.show()
+
         current_screen.tick()
         time.sleep(0.025)
 

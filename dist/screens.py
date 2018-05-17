@@ -110,7 +110,10 @@ class Screen(object):
         self.bottom_line = [0, bounds[3],  bounds[2], bounds[3] ]
 
     def tick(self):
-        pass
+        raise Exception("tick() must be implemented in derived class") 
+    
+    def show(self):
+        raise Exception("show() must be implemented in derived class") 
 
     def draw_marker(self, draw):
         draw.rectangle(self.top_line, outline="white")
@@ -161,6 +164,9 @@ class MainScreen(Screen):
             del self.artist_scroller
         self.has_info = False
 
+    def show(self):
+        pass
+
     def tick(self):
         if self.has_info:
             self.artist_scroller.tick()
@@ -171,6 +177,7 @@ class MainScreen(Screen):
             self.image_composition.refresh()
             self.draw_marker(draw)
 
+    
 
 class SimpleScreen(Screen):
     def __init__(self, device, font, text):
@@ -180,6 +187,9 @@ class SimpleScreen(Screen):
             size = draw.textsize(text, font=self.font)
             self.left = device.width//2 - size[0]//2
             self.top = device.height//2 - size[1]//2 - 5
+        self.is_rendered = False
+
+    def show(self):
         self.is_rendered = False
 
     def tick(self):
