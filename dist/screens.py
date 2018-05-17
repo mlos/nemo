@@ -171,3 +171,21 @@ class MainScreen(Screen):
             self.image_composition.refresh()
             self.draw_marker(draw)
 
+
+class SimpleScreen(Screen):
+    def __init__(self, device, font, text):
+        super(SimpleScreen, self).__init__(device, font)
+        self.text = text
+        with canvas(self.device) as draw:
+            size = draw.textsize(text, font=self.font)
+            self.left = device.width//2 - size[0]//2
+            self.top = device.height//2 - size[1]//2 - 5
+        self.is_rendered = False
+
+    def tick(self):
+        if self.is_rendered:
+            return
+        self.is_rendered = True
+        with canvas(self.device) as draw:
+            draw.text((self.left, self.top), self.text, fill="white", font=self.font)
+            self.draw_marker(draw)

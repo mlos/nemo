@@ -12,6 +12,7 @@ from luma.core.render import canvas
 from luma.core.image_composition import ImageComposition, ComposableImage
 import RPi.GPIO as GPIO
 from screens import MainScreen
+from screens import SimpleScreen
 import graphutils
 
 OLED_RES = 25
@@ -67,13 +68,16 @@ mode = 1
     
 
 m = MainScreen(device, fnt)
+welcome_screen = SimpleScreen(device, fnt, "Welcome to Nemo")
+
+current_screen = m
 
 try:
     m.set_info("Song with a very long title", "Artist with a very long name")
     m.resume()
 
     while True:
-        m.tick()
+        current_screen.tick()
         time.sleep(0.025)
 
 except KeyboardInterrupt:
