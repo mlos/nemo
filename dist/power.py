@@ -30,15 +30,6 @@ GPIO.setup(PWR_BTN_IN, GPIO.IN)
 GPIO.setup(LED_R_CTL, GPIO.OUT)
 GPIO.setup(LED_G_CTL, GPIO.OUT)
 
-#GPIO.setup(OLED_RES, GPIO.OUT)
-
-## Reset OLED
-#GPIO.output(OLED_RES, True)
-#time.sleep(1)
-#GPIO.output(OLED_RES, False)
-#time.sleep(1)
-#GPIO.output(OLED_RES, True)
-
 
 #if Debug:
 #  GPIO.add_event_detect(PWR_BTN_IN, GPIO.FALLING, callback=rising_callback,bouncetime=200)
@@ -52,7 +43,6 @@ inbus = Publisher(AppKey)
 
 # Start polling
 while True:
-  print "."
   GPIO.wait_for_edge(PWR_BTN_IN, GPIO.RISING)
   startTime=time.time()
   Done = False
