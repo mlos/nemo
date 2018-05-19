@@ -9,29 +9,19 @@
 # Description:       Start power manager
 ### END INIT INFO
 
-# Nemo
-# (c) 2018 Maarten Los. All rights reserved.
-#
-
-do_stop () {
-  GPIO=/sys/class/gpio
-  RST=25 # GPIO 25 (BCM) - OLED RST
-  echo $RST > $GPIO/export
-  echo out > $GPIO/gpio$RST/direction
-  echo 0 > $GPIO/gpio$RST/value
-}
-
+PIDFILE=/var/run/power.pid
 
 case "$1" in
-  start|status)
-	# No-op
-	;;
-  restart|reload|force-reload)
+  start)
+    /usr/bin/python /home/upnp/sys/power.py &
+    echo "$!" > $PIDFILE
+    ;;
+  stop)
+    kill  `cat $PIDFILE`
+    ;;
+  status|restart|reload|force-reload)
 	echo "Error: argument '$1' not supported" >&2
 	exit 3
-	;;
-  stop)
-	do_stop
 	;;
   *)
 	echo "Usage: $0 start|stop" >&2
