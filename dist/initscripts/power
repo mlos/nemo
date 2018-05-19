@@ -1,0 +1,42 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          power
+# Required-Start:    $network $remote_fs $local_fs $syslog
+# Required-Stop:     $network $remote_fs $local_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start power manager
+# Description:       Start power manager
+### END INIT INFO
+
+# Nemo
+# (c) 2018 Maarten Los. All rights reserved.
+#
+
+do_stop () {
+  GPIO=/sys/class/gpio
+  RST=25 # GPIO 25 (BCM) - OLED RST
+  echo $RST > $GPIO/export
+  echo out > $GPIO/gpio$RST/direction
+  echo 0 > $GPIO/gpio$RST/value
+}
+
+
+case "$1" in
+  start|status)
+	# No-op
+	;;
+  restart|reload|force-reload)
+	echo "Error: argument '$1' not supported" >&2
+	exit 3
+	;;
+  stop)
+	do_stop
+	;;
+  *)
+	echo "Usage: $0 start|stop" >&2
+	exit 3
+	;;
+esac
+
+:

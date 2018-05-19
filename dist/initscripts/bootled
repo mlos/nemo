@@ -1,0 +1,24 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          bootled
+# Required-Start:    mountkernfs
+# Required-Stop:     
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Light up the green Nemo LED
+### END INIT INFO
+
+# Nemo
+# (c) 2017 Maarten Los. All rights reserved.
+#
+# Turn on green LED to indicate we're booting
+# Red LED will be turned on by default, resulting in orange LED
+# indicator using the onboard RGB LED
+#
+# Enable GREEN = 1 = ON
+GPIO=/sys/class/gpio
+LED=24 # GPIO 24 (BCM) - Green
+echo $LED > $GPIO/export
+echo out > $GPIO/gpio$LED/direction
+echo 1 > $GPIO/gpio$LED/value
+

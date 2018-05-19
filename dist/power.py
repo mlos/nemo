@@ -13,7 +13,6 @@ Debug=0
 # BCM numbering (not BOARD)
 PWR_BTN_IN = 18
 LED_R_CTL = 23
-LED_G_CTL = 24
 
 AppKey = "nemo"
 AppType = 0
@@ -28,8 +27,7 @@ if Debug:
 GPIO.setmode(GPIO.BCM) # Use Pi numbering (not physcial pins)
 GPIO.setup(PWR_BTN_IN, GPIO.IN)
 GPIO.setup(LED_R_CTL, GPIO.OUT)
-GPIO.setup(LED_G_CTL, GPIO.OUT)
-
+# Green LED is handled in  /etc/rc.d/bootled
 
 #if Debug:
 #  GPIO.add_event_detect(PWR_BTN_IN, GPIO.FALLING, callback=rising_callback,bouncetime=200)

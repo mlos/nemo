@@ -1,0 +1,21 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          oled
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     
+# Default-Stop:      0 6
+# Short-Description: Turn off OLED
+### END INIT INFO
+
+# Nemo
+# (c) 2018 Maarten Los. All rights reserved.
+#
+# Pull down the OLED RST line, powering off the screen
+#
+GPIO=/sys/class/gpio
+LED=25 # GPIO 25 (BCM) - Green
+echo $LED > $GPIO/export
+echo out > $GPIO/gpio$LED/direction
+echo 0 > $GPIO/gpio$LED/value
+

@@ -1,0 +1,6 @@
+#
+# Add this line to /etc/rc.local
+#
+
+/home/upnp/sys/boot.sh &
+
