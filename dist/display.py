@@ -7,6 +7,7 @@ import os
 import time
 import sys
 import thread
+import signal
 import json
 from luma.core import cmdline
 import RPi.GPIO as GPIO
@@ -29,6 +30,12 @@ def enable_oled():
     GPIO.output(OLED_RES, True)
     time.sleep(1)
 
+def disable_oled():
+    GPIO.output(OLED_RES, False)
+    
+def sighandler(signum, frame):
+    disable_oled()
+    sys.exit(1)
 
 def get_device():
     parser = cmdline.create_parser(description='nemo')
@@ -41,10 +48,10 @@ class SharedData:
 
 lock = thread.allocate_lock()
 event = SharedData()
+event.has_event = False
 
 def inbus_observer():
     global event
-    event.has_event = False
     with Subscriber("nemo") as s:
         while True:
             try:
@@ -76,16 +83,16 @@ mode = 1
 
 music_screen = MainScreen(device, fnt)
 welcome_screen = OneLineScreen(device, fnt, "Welcome to Nemo")
-goodbye_screen = OneLineScreen(device, fnt, "Goodbye")
+goodbye_screen = OneLineScreen(device, fnt, "Shutting down...")
 
 current_screen = welcome_screen
 
 thread.start_new_thread(inbus_observer, ())
 
-try:
-    music_screen.set_info("Song with a very long title", "Artist with a very long name")
-    music_screen.resume()
+# Trap SIGHUP
+signal.signal(signal.SIGHUP, sighandler)
 
+try:
     must_handle_event = False
     payload = None
     app_type = -1
