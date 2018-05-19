@@ -11,7 +11,7 @@ import json
 from luma.core import cmdline
 import RPi.GPIO as GPIO
 from screens import MainScreen
-from screens import SimpleScreen
+from screens import OneLineScreen
 import graphutils
 from inbus.client.subscriber import Subscriber
 
@@ -23,9 +23,9 @@ def enable_oled():
 
     # Reset OLED
     GPIO.output(OLED_RES, True)
-    time.sleep(1)
+    time.sleep(0.3)
     GPIO.output(OLED_RES, False)
-    time.sleep(1)
+    time.sleep(0.3)
     GPIO.output(OLED_RES, True)
     time.sleep(1)
 
@@ -75,9 +75,10 @@ fnt = graphutils.make_font("PixelOperator.ttf", 16)
 mode = 1
 
 music_screen = MainScreen(device, fnt)
-welcome_screen = SimpleScreen(device, fnt, "Welcome to Nemo")
+welcome_screen = OneLineScreen(device, fnt, "Welcome to Nemo")
+goodbye_screen = OneLineScreen(device, fnt, "Goodbye")
 
-current_screen = music_screen
+current_screen = welcome_screen
 
 thread.start_new_thread(inbus_observer, ())
 
@@ -97,11 +98,12 @@ try:
                 event.has_event = False
 
         if must_handle_event:
-            print "EVENT!", app_type
             must_handle_event = False
             if app_type == 0:
                 if payload == "1":
                     current_screen = welcome_screen
+                elif payload == "0":
+                    current_screen = goodbye_screen
             elif app_type == 10:
                 info = json.loads(payload)
                 music_screen.set_info(info["title"], info["artist"])

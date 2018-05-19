@@ -179,14 +179,11 @@ class MainScreen(Screen):
 
     
 
-class SimpleScreen(Screen):
+class OneLineScreen(Screen):
     def __init__(self, device, font, text):
-        super(SimpleScreen, self).__init__(device, font)
+        super(OneLineScreen, self).__init__(device, font)
         self.text = text
-        with canvas(self.device) as draw:
-            size = draw.textsize(text, font=self.font)
-            self.left = device.width//2 - size[0]//2
-            self.top = device.height//2 - size[1]//2 - 5
+        self.left, self.top = graphutils.text_centre(device, text, font)
         self.is_rendered = False
 
     def show(self):
