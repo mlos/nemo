@@ -11,7 +11,7 @@ import signal
 import json
 from luma.core import cmdline
 import RPi.GPIO as GPIO
-from screens import MainScreen
+from screens import MusicScreen
 from screens import OneLineScreen
 import graphutils
 from inbus.client.subscriber import Subscriber
@@ -81,9 +81,10 @@ fnt = graphutils.make_font("PixelOperator.ttf", 16)
 # 4 - Rendering artist + song + status
 mode = 1
 
-music_screen = MainScreen(device, fnt)
+music_screen = MusicScreen(device, fnt)
 welcome_screen = OneLineScreen(device, fnt, "Welcome to Nemo")
 goodbye_screen = OneLineScreen(device, fnt, "Shutting down...")
+ready_screen = OneLineScreen(device, fnt, "Ready to rock")
 
 current_screen = welcome_screen
 
@@ -91,6 +92,10 @@ thread.start_new_thread(inbus_observer, ())
 
 # Trap SIGHUP
 signal.signal(signal.SIGHUP, sighandler)
+
+PAUSED = 0
+PLAYING = 1
+STOPPED = 2
 
 try:
     must_handle_event = False
@@ -114,7 +119,15 @@ try:
             elif app_type == 10:
                 info = json.loads(payload)
                 music_screen.set_info(info["title"], info["artist"])
-                current_screen = music_screen
+                play_state = info["playstate"]
+                if play_state in [ PAUSED, PLAYING ]:
+                    current_screen = music_screen
+                    if play_state == PAUSED:
+                        music_screen.pause()
+                    elif play_state == PLAYING:
+                        music_screen.play()
+                elif play_state == STOPPED:
+                    current_screen = ready_screen
             current_screen.show()
 
         current_screen.tick()

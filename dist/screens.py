@@ -5,7 +5,7 @@
 #
 from PIL import Image, ImageDraw
 from luma.core.render import canvas
-from luma.core.image_composition import ImageComposition, ComposableImage
+from luma.core.image_composition import ComposableImage
 import graphutils
 
 class TextImage():
@@ -120,12 +120,14 @@ class Screen(object):
         draw.rectangle(self.bottom_line, outline="white")
     
 
-class MainScreen(Screen):
+class MusicScreen(Screen):
     def __init__(self, device, font):
-        super(MainScreen, self).__init__(device, font)
-        self.ci_play = ComposableImage(graphutils.make_bitmap("play.png"), position=(0, 50))
-        self.ci_pause = ComposableImage(graphutils.make_bitmap("pause.png"), position=(0, 50))
-        self.image_composition = ImageComposition(self.device)
+        super(MusicScreen, self).__init__(device, font)
+        self.ci_play = ComposableImage(graphutils.make_bitmap("play.png"), position=(60, 48))
+        self.ci_pause = ComposableImage(graphutils.make_bitmap("pause.png"), position=(60, 48))
+        self.image_composition = graphutils.ImageCompositionWithHideableImage(self.device)
+        self.image_composition.add_image(self.ci_play)
+        self.image_composition.add_image(self.ci_pause)
         self.synchroniser = Synchroniser()
         self.has_info = False
         self.is_paused = False
@@ -134,21 +136,14 @@ class MainScreen(Screen):
 
     def pause(self):
         self.is_paused = True
-        #self.image_composition.add_image(self.ci_pause)
-        #self.image_composition.add_image(self.ci_play)
-        #self.image_composition.remove_image(self.ci_play)
+        self.image_composition.hide(self.ci_play)
+        self.image_composition.unhide(self.ci_pause)
 
-    def resume(self):
+    def play(self):
         self.is_paused = False
-        #self.image_composition.add_image(self.ci_pause)
-        #self.image_composition.add_image(self.ci_play)
-        #self.image_composition.remove_image(self.ci_pause)
+        self.image_composition.hide(self.ci_pause)
+        self.image_composition.unhide(self.ci_play)
 
-    def stop(self):
-        self.unset_info()
-        #self.image_composition.remove_image(self.ci_pause)
-        #self.image_composition.remove_image(self.ci_play)
-        
     def set_info(self, song, artist):
         self.unset_info()
         self.ci_song = ComposableImage(TextImage(self.device, song, self.font).image, position=(0, 1))
@@ -176,7 +171,6 @@ class MainScreen(Screen):
         with canvas(self.device, background=self.image_composition()) as draw:
             self.image_composition.refresh()
             self.draw_marker(draw)
-
     
 
 class OneLineScreen(Screen):
