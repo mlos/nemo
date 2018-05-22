@@ -190,3 +190,27 @@ class OneLineScreen(Screen):
         with canvas(self.device) as draw:
             draw.text((self.left, self.top), self.text, fill="white", font=self.font)
             self.draw_marker(draw)
+
+# A textItem consists of a (text,row) pair
+class MultiLineScreen(Screen):
+    def __init__(self, device, font, textItemList):
+        super(MultiLineScreen, self).__init__(device, font)
+        self.textItems = []
+        for i in textItemList:
+            left, top = graphutils.text_centre(device, i[0], font)
+            self.textItems.append((i[0], left, i[1]))
+        self.is_rendered = False
+
+    def show(self):
+        self.is_rendered = False
+
+    def tick(self):
+        if self.is_rendered:
+            return
+        self.is_rendered = True
+        with canvas(self.device) as draw:
+            for i in self.textItems:
+                print "top,left,text", i[2], i[1], i[0]
+                draw.text((i[1], i[2]), i[0], fill="white", font=self.font)
+            self.draw_marker(draw)
+
