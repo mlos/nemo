@@ -133,6 +133,8 @@ class MusicScreen(Screen):
         self.is_paused = False
         self.song_scroller = None
         self.artist_scroller = None
+        self.current_song = None
+        self.current_artist = None
 
     def pause(self):
         self.is_paused = True
@@ -145,19 +147,14 @@ class MusicScreen(Screen):
         self.image_composition.unhide(self.ci_play)
 
     def set_info(self, song, artist):
-        self.unset_info()
-        self.ci_song = ComposableImage(TextImage(self.device, song, self.font).image, position=(0, 1))
-        self.ci_artist = ComposableImage(TextImage(self.device, artist, self.font).image, position=(0, 20))
-        self.song_scroller = Scroller(self.image_composition, self.ci_song, 100, self.synchroniser)
-        self.artist_scroller = Scroller(self.image_composition, self.ci_artist, 100, self.synchroniser)
-        self.has_info = True
-
-    def unset_info(self):
-        if self.song_scroller:
-            del self.song_scroller
-        if self.artist_scroller:
-            del self.artist_scroller
-        self.has_info = False
+        if (song != self.current_song) or (artist != self.current_artist):
+            self.ci_song = ComposableImage(TextImage(self.device, song, self.font).image, position=(0, 1))
+            self.ci_artist = ComposableImage(TextImage(self.device, artist, self.font).image, position=(0, 20))
+            self.song_scroller = Scroller(self.image_composition, self.ci_song, 100, self.synchroniser)
+            self.artist_scroller = Scroller(self.image_composition, self.ci_artist, 100, self.synchroniser)
+            self.current_song = song
+            self.current_artist = artist
+            self.has_info = True
 
     def show(self):
         pass
@@ -166,7 +163,6 @@ class MusicScreen(Screen):
         if self.has_info:
             self.artist_scroller.tick()
             self.song_scroller.tick()
-            #time.sleep(0.025)
 
         with canvas(self.device, background=self.image_composition()) as draw:
             self.image_composition.refresh()
@@ -210,7 +206,6 @@ class MultiLineScreen(Screen):
         self.is_rendered = True
         with canvas(self.device) as draw:
             for i in self.textItems:
-                print "top,left,text", i[2], i[1], i[0]
                 draw.text((i[1], i[2]), i[0], fill="white", font=self.font)
             self.draw_marker(draw)
 
