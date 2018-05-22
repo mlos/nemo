@@ -3,6 +3,7 @@
 # (c) 2018 Maarten Los. All rights reserved.
 # 
 #
+import time
 from PIL import Image, ImageDraw
 from luma.core.render import canvas
 from luma.core.image_composition import ComposableImage
@@ -109,6 +110,7 @@ class Screen(object):
         self.top_line = [0, 0, bounds[2], 0]
         self.bottom_line = [0, bounds[3],  bounds[2], bounds[3] ]
 
+    # Returns True if the screen is valid, otherwise it is expired
     def tick(self):
         raise Exception("tick() must be implemented in derived class") 
     
@@ -167,6 +169,8 @@ class MusicScreen(Screen):
         with canvas(self.device, background=self.image_composition()) as draw:
             self.image_composition.refresh()
             self.draw_marker(draw)
+
+        return True
     
 
 class OneLineScreen(Screen):
@@ -181,11 +185,12 @@ class OneLineScreen(Screen):
 
     def tick(self):
         if self.is_rendered:
-            return
+            return True
         self.is_rendered = True
         with canvas(self.device) as draw:
             draw.text((self.left, self.top), self.text, fill="white", font=self.font)
             self.draw_marker(draw)
+        return True
 
 # A textItem consists of a (text,row) pair
 class MultiLineScreen(Screen):
@@ -202,10 +207,44 @@ class MultiLineScreen(Screen):
 
     def tick(self):
         if self.is_rendered:
-            return
+            return True
         self.is_rendered = True
         with canvas(self.device) as draw:
             for i in self.textItems:
                 draw.text((i[1], i[2]), i[0], fill="white", font=self.font)
             self.draw_marker(draw)
+
+        return True
+
+
+
+# A textItem consists of a (text,row) pair
+class AboutScreen(MultiLineScreen):
+    def __init__(self, device, font, textItemList, expiryTime):
+        super(AboutScreen, self).__init__(device, font, textItemList)
+        self.textItems = []
+        for i in textItemList:
+            left, top = graphutils.text_centre(device, i[0], font)
+            self.textItems.append((i[0], left, i[1]))
+        self.is_rendered = False
+        self.expiryTime = expiryTime
+
+    def show(self):
+        self.is_rendered = False
+        self.start_time = time.time()
+
+    def tick(self):
+        if (time.time() - self.start_time) > self.expiryTime:
+            return False
+
+        if self.is_rendered:
+            return True
+        self.is_rendered = True
+        with canvas(self.device) as draw:
+            for i in self.textItems:
+                draw.text((i[1], i[2]), i[0], fill="white", font=self.font)
+            self.draw_marker(draw)
+
+        return True
+
 

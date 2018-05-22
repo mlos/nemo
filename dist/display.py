@@ -14,7 +14,8 @@ from luma.core import cmdline
 import RPi.GPIO as GPIO
 from screens import MusicScreen
 from screens import OneLineScreen
-from screens import MultiLineScreen
+from screens import AboutScreen
+
 import graphutils
 from inbus.client.subscriber import Subscriber
 
@@ -93,10 +94,10 @@ music_screen = MusicScreen(device, fnt)
 welcome_screen = OneLineScreen(device, fnt, "Welcome to Nemo")
 goodbye_screen = OneLineScreen(device, fnt, "Shutting down...")
 ready_screen = OneLineScreen(device, fnt, "Ready to rock")
-about_screen = MultiLineScreen(device, fnt, [ 
+about_screen = AboutScreen(device, fnt, [ 
     ("Nemo", 4),
     ("(c) Maarten Los", 24),
-    (get_ip_address(), 46)])
+    (get_ip_address(), 46)], 3)
 
 current_screen = welcome_screen
 
@@ -115,6 +116,7 @@ try:
     app_type = -1
     stop_requested = False
     MIN_STOP_TIME = 2 # seconds
+    previous_screen = None
 
     while True:
         with lock:
@@ -128,6 +130,7 @@ try:
             must_handle_event = False
             if app_type == 0:
                 if payload == "1":
+                    previous_screen = current_screen
                     current_screen = about_screen
                 elif payload == "0":
                     current_screen = goodbye_screen
@@ -159,7 +162,12 @@ try:
 
             current_screen.show()
 
-        current_screen.tick()
+        valid = current_screen.tick()
+        if not valid:
+            if (previous_screen is not None):
+                current_screen = previous_screen
+                current_screen.show()
+            
         time.sleep(0.025)
 
 except KeyboardInterrupt:
