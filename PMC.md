@@ -93,4 +93,4 @@ With wires leading also to the Raspberry Pi GPIO (not depicted)
 ![PMC prototype](diagrams/PMCPrototype.jpg)
 
 [ref-block-diagram]: diagrams/generated/BlockDiagram.png
-[ref-scheme-it]: http://digikey.com/schemeit
+[ref-scheme-it]: http://www.digikey.com/schemeit
