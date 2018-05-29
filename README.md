@@ -1,6 +1,6 @@
 # nemo
 
-** UPDATE: Added [Power Management Circuitry](PMC.md)**
+** UPDATE: Added [Peripheral Management Circuitry](PMC.md)**
 
 - - -
 ## The Concept
@@ -34,7 +34,7 @@ Nemo is conceived to fulfill the following needs:
 
 * Repurpose my [Raspberry Pi model B][ref-pi]
 * Good enough audio quality, but at least better than what's [built-in][ref-pi-audio]
-* The ability to gracefully power off the device (orderly shutdown of the [system software][ref-raspbian]). Although the Pi [draws relatively little power][ref-pi-power], it doesn't seem right to leave it powered on 24/7.
+* The ability to gracefully power off the device (orderly shutdown of the [system software][ref-raspbian]). Although the Pi [draws relatively little power][ref-pi-power], it makes no sense to leave it on 24/7 when not in use.
 * Feedback about operational state (booting, playing, powering off). A user should be able to see what's going on.
 * [RCA][ref-rca-jack] jack to connect it to standard stereo equipment.
 * LAN connection to easily hook it up to the home network (no Wi-Fi configuration troubles)
@@ -51,9 +51,7 @@ The following components are used:
 
 **PWR** - 5V power supply.
 
-**BTN_1** and **BTN_2** - Function buttons to control **DISP**
-
-**DISP** - A [128x128 pixel OLED][ref-oled] for displaying song and artist information
+**DISP** - A [128x64 pixel OLED][ref-oled] for displaying song and artist information
 
 **SNDC** - An [external USB sound card][ref-usb-sound], for "good enough" quality audio
 
@@ -61,7 +59,7 @@ The following components are used:
 
 **LED_RGB** - Status LED for system feedback, with support for red, yellow, green and purple colors. A single [RGB LED][ref-led] neatly fulfills this function.
 
-**PMC** - The [Power Management Circuitry](PMC.md), interfaces with the **RPI** and is responsible for making sure the LEDs have the right color and enabling the **PWR_RES** button depending on the system state.
+**PMC** - The [Peripheral Management Circuitry](PMC.md), interfaces with the **RPI** and is responsible for handling the LEDs, power button and the OLED display.
 
 - - - 
 
@@ -96,5 +94,5 @@ Follows
 [ref-pi-power]: http://www.pidramble.com/wiki/benchmarks/power-consumption
 [ref-rca-jack]: http://www.lifewire.com/rca-jack-definition-3134804
 [ref-usb-sound]: http://www.google.nl/search?q=HDE+7.1+channel+booster
-[ref-oled]: http://www.google.nl/search?q=128x128+OLED
+[ref-oled]: http://www.google.nl/search?q=128x64+OLED
 [ref-led]: http://www.google.nl/search?q=diffused+RGB+LED+5mm
