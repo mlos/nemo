@@ -24,7 +24,8 @@ The peripheral management circuitry behaviour is conceived to fulfill the follow
 
 ![Circuit](diagrams/PeripheralManagementCircuitry.png)
 
-<sub>(Circuit created using [Scheme-it][ref-scheme-it])</sub>
+<sub>(Circuit created using [Scheme-it][ref-scheme-it] and simulated
+using [Circuit Simulator Applet][ref-falstad]).
 
 #### Connections
 The circuit will be connected to the reset of the system:
@@ -43,7 +44,7 @@ OLED\_CLK\_CTL | OLED I2C Clock | GPIO 3 (SCL)
 OLED\_DATA\_CTL | OLED I2C Data | GPIO 2 (SDA)
 OLED\_RES\_CTL | OLED Reset | GPIO 25
 RES\_BTN\_RUN, RES\_BTN\_GND | Used to reset the circuit | Connected to [**PWR_RES**][ref-block-diagram], depicted as S1 in the schema.
-RST\_INB | Reset Inhibit. Prevents the reset signal, shorting **RES\_BTN\_RUN** and **RES\_BTN\_GND** will *not* result in a reset of the system | GPIO 24 (together with **LED\_G\_CTL**)
+RST\_INB | Reset Inhibit. When high, prevents the reset signal: shorting **RES\_BTN\_RUN** and **RES\_BTN\_GND** will *not* result in a reset of the system | GPIO 24 (together with **LED\_G\_CTL**)
 LED\_G\_CTL | Controls the green LED. When high, the green led wil be *on*. | GPIO 24 (together with **RST\_INB**)
 LED\_R\_CTL | Controls the red LED. When high, the red LED will be *off*. | GPIO 23
 
@@ -78,7 +79,7 @@ R1, R4, R6 | 2k2 0.25W
 R2, R5 | 47k 0.25W
 R3 | 15k 0.25W
 R7 | 4k7 0.25W
-R8 | 10k 0.25W
+R8, R9 | 10k 0.25W
 Q1, Q2 | BC556
 Q3, Q4 | BC546
 S1 | Momentary switch
@@ -94,3 +95,4 @@ With wires leading also to the Raspberry Pi GPIO (not depicted)
 
 [ref-block-diagram]: diagrams/generated/BlockDiagram.png
 [ref-scheme-it]: http://www.digikey.com/schemeit
+[ref-falstad]: http://www.falstad.com/circuit/
