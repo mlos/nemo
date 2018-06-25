@@ -93,6 +93,11 @@ With wires leading also to the Raspberry Pi GPIO (not depicted)
 
 ![PMC prototype](diagrams/PMCPrototype.jpg)
 
+#### The Real Deal
+
+Peripherals not connected.
+![PMC_real](diagrams/PMCReal.jpg)
+
 [ref-block-diagram]: diagrams/generated/BlockDiagram.png
 [ref-scheme-it]: http://www.digikey.com/schemeit
 [ref-falstad]: http://www.falstad.com/circuit/

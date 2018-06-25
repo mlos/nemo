@@ -1,8 +1,6 @@
 # nemo
 
-** UPDATE: Added [Peripheral Management Circuitry](PMC.md)**
 
-- - -
 ## The Concept
 
 Welcome to Nemo, the **ne**tworked **m**usic b**o**x. The project describes my efforts to create a homebrew UPnP renderer, with the following goals:
@@ -61,18 +59,34 @@ The following components are used:
 
 **PMC** - The [Peripheral Management Circuitry](PMC.md), interfaces with the **RPI** and is responsible for handling the LEDs, power button and the OLED display.
 
-- - - 
 
-### Software
+## Final Result
+The casing is a repurposed digital receiver, sourced in the local thrift store for a couple of euros.
 
-Follows
+### The innards
+After ripping out the main board, I was left with very handy power supply, providing a clean 12V and 5V, or so I thought. Unfortunately it made a strange clicking noise. Digital electronics is a nice enough challenge;
+messing around with high voltage circuitry is a bridge too far. That's why
+I opted for the high-tech solution currently in use.
 
-### Hardware / Software interface
+![PMC prototype](diagrams/Innards.jpg)
 
-Follows
 
-- - - 
-- 
+### Final result...
+
+... or almost. The lid has to be screwed on, but that's it.
+
+![PMC prototype](diagrams/AlmostThere.jpg)
+
+The wires from the PMC are connected to the LED, OLED and PWR button, mounted on
+top of the detachable front panel.
+
+
+
+Thanks for reading!
+
+
+
+
 
 
 
