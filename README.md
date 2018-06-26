@@ -80,7 +80,7 @@ to be distributed among different components.
 **display** subscribes to events coming from _power_ and _upnp-dispay_ and renders the currently playing song and artist on the OLED display. It uses 
 [luma-oled][ref-luma-oled] by Richard Hull to do the rendering.
 
-Please refer to [Installation](dist/Install.md) for more details.
+Please refer to [Installation](dist/INSTALL.md) for more details.
 
 
 ## Final Result
