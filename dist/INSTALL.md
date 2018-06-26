@@ -1,13 +1,12 @@
-Installation:
-
-- Install 
+- Install Raspbian
+- Create a new user 'upnp'
 - Create /home/upnp/sys
 - Install the following files into /home/upnp/sys:
-    screens.py
-    display.py
-    graphutils.py
-    inbus-server.py
-    power.py
+ - screens.py
+ - display.py
+ - graphutils.py
+ - inbus-server.py
+ - power.py
 
 - Copy all files in from initscripts into /etc/init.d
 - For each file, execute:
