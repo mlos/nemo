@@ -59,6 +59,29 @@ The following components are used:
 
 **PMC** - The [Peripheral Management Circuitry](PMC.md), interfaces with the **RPI** and is responsible for handling the LEDs, power button and the OLED display.
 
+### Software
+For this project to succeed at all, the Raspberry Pi will have to have a basic
+setup that allows playing music through UPnP / DLNA. My acknowledgements go to
+Stephen C. Phillips, who [provides a thorough explanation on his website][ref-scphillips] on how to achieve this.
+
+The following diagram shows how the main software components are deployed.
+- - -
+![Deployment diagram](diagrams/generated/DeploymentDiagram.png)
+- - -
+**gmediarender** is the [core program][ref-gmrender-resurrect] written by Henner Zeller that handles the UPnP discovery and media rendering. Instructions for getting it to work can be found on [Stephen's website][ref-scphillips], mentioned earlier.
+
+**upnp-display** is based on [upnp-display][ref-upnp-display] (also by Henner). It listens to UPnP events and displays them on an LCD. It has been [modified][ref-upnp-display-mine] in order to publish to _inbus_.
+
+**inbus** is a [minimalistic message broker][ref-inbus] that allows messages
+to be distributed among different components.
+
+**power** observes the GPIO keys and sends the events to _inbus_.
+
+**display** subscribes to events coming from _power_ and _upnp-dispay_ and renders the currently playing song and artist on the OLED display. It uses 
+[luma-oled][ref-luma-oled] by Richard Hull to do the rendering.
+
+Please refer to [Installation](dist/Install.md) for more details.
+
 
 ## Final Result
 The casing is a repurposed digital receiver, sourced in the local thrift store for a couple of euros.
@@ -110,3 +133,9 @@ Thanks for reading!
 [ref-usb-sound]: http://www.google.nl/search?q=HDE+7.1+channel+booster
 [ref-oled]: http://www.google.nl/search?q=128x64+OLED
 [ref-led]: http://www.google.nl/search?q=diffused+RGB+LED+5mm
+[ref-upnp-display]: http://github.com/hzeller/upnp-display
+[ref-upnp-display-mine]: http://github.com/mlos/upnp-display
+[ref-gmrender-resurrect]: http://github.com/hzeller/gmrender-resurrect
+[ref-inbus]: http://github.com/mlos/inbus
+[ref-scphillips]: http://blog.scphillips.com/posts/2014/05/playing-music-on-a-raspberry-pi-using-upnp-and-dlna-v3/
+[ref-luma-oled]: http://github.com/rm-hull/luma.oled
